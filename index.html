@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hayaat — Ghana's Premium Data Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C96A;--gold-dim:#8a6e2f;
+  --dark:#111111;--dark2:#1a1a1a;--dark3:#222222;--dark4:#2a2a2a;
+  --text:#f0ead8;--muted:#9a8f78;--border:#2a2a2a;
+}
+html{scroll-behavior:smooth}
+body{background:#111;color:#f0ead8;font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;background:#111;border-bottom:1px solid #1e1e1e;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:#C9A84C;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;color:#111;font-weight:500}
+.logo-text{font-size:19px;font-weight:500;color:#f0ead8;letter-spacing:.01em}
+.logo-text span{color:#C9A84C}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{padding:7px 14px;font-size:13px;color:#9a8f78;border-radius:8px;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;transition:all .15s}
+.nav-link:hover{color:#f0ead8;background:#1a1a1a}
+.nav-right{display:flex;align-items:center;gap:10px}
+.signin-btn{padding:8px 16px;background:none;border:1px solid #2a2a2a;border-radius:8px;font-size:13px;color:#9a8f78;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.signin-btn:hover{border-color:#C9A84C;color:#C9A84C}
+.cart-btn{display:flex;align-items:center;gap:8px;background:#C9A84C;border:none;border-radius:8px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:500;color:#111;font-family:'DM Sans',sans-serif;transition:background .15s}
+.cart-btn:hover{background:#E8C96A}
+.cart-badge{background:#111;color:#C9A84C;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
+
+/* HERO */
+.hero{padding:64px 40px 52px;text-align:center;border-bottom:1px solid #1e1e1e;background:#111}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.12em;color:#C9A84C;text-transform:uppercase;border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:6px 16px;margin-bottom:22px}
+.hero-pill svg{width:12px;height:12px;fill:#C9A84C}
+.hero h1{font-size:42px;font-weight:500;color:#f0ead8;line-height:1.2;margin-bottom:14px;max-width:700px;margin-left:auto;margin-right:auto}
+.hero h1 em{color:#C9A84C;font-style:normal;font-family:'Playfair Display',serif}
+.hero-sub{font-size:15px;color:#9a8f78;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.search-bar{display:flex;max-width:480px;margin:0 auto 28px;border:1px solid #2a2a2a;border-radius:10px;overflow:hidden;background:#1a1a1a;transition:border-color .2s}
+.search-bar:focus-within{border-color:#C9A84C}
+.search-bar input{flex:1;padding:13px 18px;background:transparent;border:none;font-size:14px;color:#f0ead8;font-family:'DM Sans',sans-serif;outline:none}
+.search-bar input::placeholder{color:#444}
+.search-bar button{padding:13px 22px;background:#C9A84C;border:none;color:#111;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.search-bar button:hover{background:#E8C96A}
+.trust-row{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#9a8f78}
+.trust-icon{color:#C9A84C;font-size:14px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#151515;border-bottom:1px solid #1e1e1e}
+.stat{padding:20px;text-align:center;border-right:1px solid #1e1e1e}
+.stat:last-child{border-right:none}
+.stat-num{font-size:22px;font-weight:500;color:#C9A84C;font-family:'Playfair Display',serif}
+.stat-label{font-size:11px;color:#9a8f78;margin-top:3px;letter-spacing:.03em}
+
+/* SHOP */
+.shop{display:grid;grid-template-columns:210px 1fr;min-height:600px}
+.sidebar{background:#151515;border-right:1px solid #1e1e1e;padding:24px 0}
+.sidebar-title{font-size:10px;font-weight:500;letter-spacing:.12em;color:#444;text-transform:uppercase;padding:0 20px 10px}
+.net-item{display:flex;align-items:center;gap:10px;padding:11px 20px;cursor:pointer;border-left:2px solid transparent;transition:all .15s}
+.net-item:hover{background:#1c1c1c}
+.net-item.active{background:#1c1c1c;border-left-color:#C9A84C}
+.net-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.net-label{font-size:13px;color:#9a8f78;transition:color .15s}
+.net-item.active .net-label,.net-item:hover .net-label{color:#f0ead8}
+.net-count{margin-left:auto;font-size:10px;color:#444;background:#1e1e1e;border-radius:10px;padding:2px 7px}
+.sidebar-sep{height:1px;background:#1e1e1e;margin:16px 0}
+.filter-section{padding:0 20px}
+.filter-label{font-size:10px;color:#444;margin-bottom:9px;text-transform:uppercase;letter-spacing:.08em}
+.filter-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.ftag{padding:4px 11px;border:1px solid #2a2a2a;border-radius:20px;font-size:11px;color:#9a8f78;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;background:none}
+.ftag.on{border-color:#C9A84C;color:#C9A84C;background:rgba(201,168,76,.06)}
+
+.main{padding:22px 28px;background:#111}
+.main-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.main-title{font-size:15px;font-weight:500;color:#f0ead8}
+.main-count{font-size:12px;color:#444;font-weight:400;margin-left:6px}
+.sort-sel{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:7px 12px;font-size:12px;color:#9a8f78;cursor:pointer;font-family:'DM Sans',sans-serif;outline:none}
+.bundles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.bcard{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:17px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.bcard:hover{border-color:#C9A84C;background:#1e1c17;transform:translateY(-1px)}
+.pop-tag{position:absolute;top:0;right:14px;background:#C9A84C;color:#111;font-size:9px;font-weight:600;padding:3px 9px;border-radius:0 0 7px 7px;letter-spacing:.05em;text-transform:uppercase}
+.net-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:13px}
+.mtn-pill{background:#2a2000;color:#C9A84C;border:1px solid #3a3000}
+.at-pill{background:#001828;color:#5BA3D9;border:1px solid #002840}
+.tel-pill{background:#280010;color:#D9547A;border:1px solid #400020}
+.bsize{font-size:26px;font-weight:500;color:#f0ead8;margin-bottom:2px;font-family:'Playfair Display',serif}
+.bvalid{font-size:11px;color:#9a8f78;margin-bottom:11px;display:flex;align-items:center;gap:5px}
+.bprice{font-size:17px;font-weight:500;color:#C9A84C;margin-bottom:13px}
+.badd{width:100%;padding:9px;background:#C9A84C;color:#111;border:none;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.badd:hover{background:#E8C96A}
+.badd.added{background:transparent;color:#C9A84C;border:1px solid #C9A84C}
+
+/* FEATURES */
+.features{background:#151515;border-top:1px solid #1e1e1e;padding:52px 40px}
+.feat-head{text-align:center;margin-bottom:32px}
+.feat-eyebrow{font-size:10px;font-weight:500;letter-spacing:.12em;color:#C9A84C;text-transform:uppercase;margin-bottom:8px}
+.feat-title{font-size:24px;font-weight:500;color:#f0ead8;font-family:'Playfair Display',serif}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.feat-card{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:22px;text-align:center;transition:border-color .2s}
+.feat-card:hover{border-color:#C9A84C}
+.feat-icon{font-size:28px;margin-bottom:12px;display:block}
+.feat-name{font-size:14px;font-weight:500;color:#f0ead8;margin-bottom:6px}
+.feat-desc{font-size:12px;color:#9a8f78;line-height:1.6}
+
+/* FOOTER */
+.footer{background:#0d0d0d;border-top:1px solid #1a1a1a;padding:36px 40px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px}
+.footer-brand .logo-text{font-size:17px}
+.footer-brand p{font-size:12px;color:#444;margin-top:8px;line-height:1.7}
+.footer-col h4{font-size:10px;font-weight:500;letter-spacing:.1em;color:#C9A84C;text-transform:uppercase;margin-bottom:12px}
+.footer-col a{display:block;font-size:12px;color:#555;margin-bottom:7px;text-decoration:none;transition:color .15s;cursor:pointer}
+.footer-col a:hover{color:#9a8f78}
+.footer-bottom{background:#0a0a0a;border-top:1px solid #151515;padding:14px 40px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom span{font-size:11px;color:#333}
+
+/* CART DRAWER */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;backdrop-filter:blur(2px)}
+.cart-overlay.open{display:block}
+.cart-drawer{position:fixed;top:0;right:0;width:320px;height:100%;background:#151515;border-left:1px solid #222;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);z-index:201}
+.cart-drawer.open{transform:translateX(0)}
+.cdhead{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid #1e1e1e}
+.cdhead h3{font-size:15px;font-weight:500;color:#f0ead8}
+.cdclose{background:none;border:none;color:#9a8f78;font-size:22px;cursor:pointer;line-height:1;transition:color .15s}
+.cdclose:hover{color:#f0ead8}
+.cdbody{flex:1;overflow-y:auto;padding:16px 22px}
+.cd-empty{text-align:center;padding:52px 0;color:#333}
+.cd-empty span{font-size:36px;display:block;margin-bottom:10px}
+.cd-empty p{font-size:13px}
+.citem{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #1e1e1e}
+.citem-info .cn{font-size:13px;font-weight:500;color:#f0ead8}
+.citem-info .cs{font-size:11px;color:#9a8f78;margin-top:2px}
+.citem-right{display:flex;align-items:center;gap:9px}
+.cp{font-size:13px;font-weight:500;color:#C9A84C}
+.cdel{background:none;border:none;color:#333;cursor:pointer;font-size:16px;transition:color .15s;padding:2px}
+.cdel:hover{color:#E24B4A}
+.cdfoot{padding:18px 22px;border-top:1px solid #1e1e1e}
+.ctrow{display:flex;justify-content:space-between;font-size:14px;font-weight:500;color:#f0ead8;margin-bottom:16px}
+.ctrow span:last-child{color:#C9A84C}
+.ccheckout{width:100%;padding:13px;background:#C9A84C;color:#111;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.ccheckout:hover{background:#E8C96A}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal-bg.open{display:flex}
+.modal{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:360px;max-width:94vw}
+.modal h3{font-size:17px;font-weight:500;color:#f0ead8;margin-bottom:6px;font-family:'Playfair Display',serif}
+.modal-sub{font-size:12px;color:#9a8f78;margin-bottom:22px}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:10px;color:#9a8f78;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.field input{width:100%;padding:11px 14px;background:#111;border:1px solid #2a2a2a;border-radius:8px;font-size:14px;color:#f0ead8;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.field input:focus{border-color:#C9A84C}
+.momo-box{display:flex;align-items:center;gap:10px;padding:12px 15px;background:#1e1c17;border:1px solid rgba(201,168,76,.3);border-radius:8px;margin-bottom:16px}
+.momo-box span{font-size:13px;color:#C9A84C}
+.order-sum{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:13px 15px;margin-bottom:16px}
+.os-row{display:flex;justify-content:space-between;font-size:12px;color:#9a8f78;padding:3px 0}
+.os-total{display:flex;justify-content:space-between;font-size:14px;font-weight:500;padding-top:9px;border-top:1px solid #1e1e1e;margin-top:7px}
+.os-total span:first-child{color:#f0ead8}
+.os-total span:last-child{color:#C9A84C}
+.pay-btn{width:100%;padding:13px;background:#C9A84C;color:#111;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:9px;transition:background .15s}
+.pay-btn:hover{background:#E8C96A}
+.cancel-btn{width:100%;padding:11px;background:none;border:1px solid #2a2a2a;border-radius:8px;font-size:13px;color:#9a8f78;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.cancel-btn:hover{border-color:#444;color:#f0ead8}
+.success-box{text-align:center;padding:12px 0}
+.success-icon{font-size:52px;color:#C9A84C;margin-bottom:14px}
+.success-box h3{font-size:19px;margin-bottom:9px}
+.success-box p{font-size:13px;color:#9a8f78;line-height:1.7}
+.done-btn{margin-top:22px;width:100%;padding:12px;background:#C9A84C;color:#111;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* SIGN IN MODAL */
+.signin-modal{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:16px;padding:30px;width:340px;max-width:94vw}
+.signin-modal h3{font-size:17px;font-weight:500;color:#f0ead8;margin-bottom:6px;font-family:'Playfair Display',serif}
+.signin-modal .modal-sub{margin-bottom:20px}
+.tab-row{display:flex;border:1px solid #2a2a2a;border-radius:8px;overflow:hidden;margin-bottom:20px}
+.tab-btn{flex:1;padding:9px;background:none;border:none;font-size:13px;color:#9a8f78;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.tab-btn.active{background:#C9A84C;color:#111;font-weight:500}
+
+@media(max-width:768px){
+  .nav{padding:0 18px}
+  .nav-links{display:none}
+  .hero{padding:40px 18px 36px}
+  .hero h1{font-size:28px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .shop{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main{padding:16px}
+  .footer{grid-template-columns:1fr;padding:28px 18px}
+  .footer-bottom{padding:14px 18px;flex-direction:column;gap:6px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#">
+    <div class="logo-mark">H</div>
+    <div class="logo-text">Hayaat<span>.</span></div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" style="color:#C9A84C">Shop</button>
+    <button class="nav-link">My orders</button>
+    <button class="nav-link">Become an agent</button>
+    <button class="nav-link">Support</button>
+  </div>
+  <div class="nav-right">
+    <button class="signin-btn" onclick="openSignIn()">Sign in</button>
+    <button class="cart-btn" onclick="openCart()">
+      🛒 Cart <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pill">
+    <svg viewBox="0 0 12 12"><path d="M6 0l1.5 4.5H12L8.25 7.5l1.5 4.5L6 9 2.25 12l1.5-4.5L0 4.5h4.5z"/></svg>
+    Instant delivery · Ghana's premium data shop
+  </div>
+  <h1>Buy data bundles for <em>any network</em>, instantly</h1>
+  <p class="hero-sub">MTN · AirtelTigo · Telecel — pay with MoMo and receive data in under 60 seconds</p>
+  <div class="search-bar">
+    <input type="tel" id="phone-input" placeholder="Enter recipient phone number..." />
+    <button>Search</button>
+  </div>
+  <div class="trust-row">
+    <span class="trust-item"><span class="trust-icon">🛡</span> Secure payments</span>
+    <span class="trust-item"><span class="trust-icon">⚡</span> Delivered in &lt; 1 min</span>
+    <span class="trust-item"><span class="trust-icon">🎧</span> 24/7 support</span>
+    <span class="trust-item"><span class="trust-icon">👥</span> 15,000+ customers</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">15,400+</div><div class="stat-label">Happy customers</div></div>
+  <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Uptime</div></div>
+  <div class="stat"><div class="stat-num">&lt; 60s</div><div class="stat-label">Avg. delivery</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Networks covered</div></div>
+</div>
+
+<!-- SHOP -->
+<div class="shop">
+  <aside class="sidebar">
+    <div class="sidebar-title">Networks</div>
+    <div class="net-item active" onclick="switchNet('all',this)">
+      <div class="net-dot" style="background:#C9A84C"></div>
+      <span class="net-label">All networks</span>
+      <span class="net-count" id="nc-all">12</span>
+    </div>
+    <div class="net-item" onclick="switchNet('mtn',this)">
+      <div class="net-dot" style="background:#C9A84C"></div>
+      <span class="net-label">MTN</span>
+      <span class="net-count">5</span>
+    </div>
+    <div class="net-item" onclick="switchNet('at',this)">
+      <div class="net-dot" style="background:#5BA3D9"></div>
+      <span class="net-label">AirtelTigo</span>
+      <span class="net-count">4</span>
+    </div>
+    <div class="net-item" onclick="switchNet('telecel',this)">
+      <div class="net-dot" style="background:#D9547A"></div>
+      <span class="net-label">Telecel</span>
+      <span class="net-count">3</span>
+    </div>
+    <div class="sidebar-sep"></div>
+    <div class="filter-section">
+      <div class="filter-label">Validity</div>
+      <div class="filter-tags">
+        <button class="ftag on" onclick="toggleFilter(this,'day')">Daily</button>
+        <button class="ftag on" onclick="toggleFilter(this,'week')">Weekly</button>
+        <button class="ftag on" onclick="toggleFilter(this,'month')">Monthly</button>
+      </div>
+    </div>
+    <div class="sidebar-sep"></div>
+    <div class="filter-section">
+      <div class="filter-label">Size</div>
+      <div class="filter-tags">
+        <button class="ftag on" onclick="toggleFilter(this,'small')">1–2 GB</button>
+        <button class="ftag on" onclick="toggleFilter(this,'mid')">3–6 GB</button>
+        <button class="ftag on" onclick="toggleFilter(this,'big')">10 GB+</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-top">
+      <div class="main-title">All bundles <span class="main-count" id="bundle-count">(12)</span></div>
+      <select class="sort-sel" onchange="sortBundles(this.value)">
+        <option value="default">Sort: default</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="size">Largest first</option>
+      </select>
+    </div>
+    <div class="bundles" id="bundles-grid"></div>
+  </main>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feat-head">
+    <div class="feat-eyebrow">Why Hayaat</div>
+    <div class="feat-title">Built for Ghana, built to last</div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card"><span class="feat-icon">⚡</span><div class="feat-name">Instant delivery</div><div class="feat-desc">Data sent to your phone in under 60 seconds, every time</div></div>
+    <div class="feat-card"><span class="feat-icon">🔒</span><div class="feat-name">Secure MoMo</div><div class="feat-desc">All payments processed securely via Mobile Money</div></div>
+    <div class="feat-card"><span class="feat-icon">💰</span><div class="feat-name">Best prices</div><div class="feat-desc">Competitive rates across all three major networks</div></div>
+    <div class="feat-card"><span class="feat-icon">🎧</span><div class="feat-name">24/7 support</div><div class="feat-desc">Real human support via WhatsApp, any time of day</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">
+    <div class="logo-text">Hayaat<span style="color:#C9A84C">.</span></div>
+    <p>Ghana's trusted data bundle platform.<br>Fast, secure, affordable.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Quick links</h4>
+    <a>Shop bundles</a>
+    <a>My orders</a>
+    <a>Become an agent</a>
+    <a>Referral programme</a>
+  </div>
+  <div class="footer-col">
+    <h4>Support</h4>
+    <a>WhatsApp us</a>
+    <a>FAQs</a>
+    <a>Terms of service</a>
+    <a>Privacy policy</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 Hayaat. All rights reserved.</span>
+  <span>🛡 Secure · Fast · Reliable</span>
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cdhead">
+    <h3>🛒 Your cart</h3>
+    <button class="cdclose" onclick="closeCart()">×</button>
+  </div>
+  <div class="cdbody" id="cdbody">
+    <div class="cd-empty"><span>🛒</span><p>Your cart is empty</p></div>
+  </div>
+  <div class="cdfoot">
+    <div class="ctrow"><span>Total</span><span id="cart-total">GH₵ 0.00</span></div>
+    <button class="ccheckout" onclick="openCheckout()">🔒 Checkout with MoMo</button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-bg" id="checkout-modal">
+  <div class="modal" id="modal-inner">
+    <h3>Complete your order</h3>
+    <p class="modal-sub">Fill in the details and approve the MoMo prompt</p>
+    <div class="field"><label>Recipient phone number</label><input type="tel" id="recv" placeholder="0244 000 000" /></div>
+    <div class="momo-box">📱 <span>Payment via Mobile Money (MoMo)</span>
+    </div>
+    <div class="field"><label>MoMo number</label><input type="tel" id="momo" placeholder="0551 234 567" /></div>
+    <div class="order-sum" id="order-sum"></div>
+    <button class="pay-btn" onclick="doPay()">🔒 Pay now</button>
+    <button class="cancel-btn" onclick="closeCheckout()">Cancel</button>
+  </div>
+</div>
+
+<!-- SIGN IN MODAL -->
+<div class="modal-bg" id="signin-modal">
+  <div class="signin-modal">
+    <h3>Welcome back</h3>
+    <p class="modal-sub">Sign in to track your orders and save preferences</p>
+    <div class="tab-row">
+      <button class="tab-btn active" id="login-tab" onclick="switchAuthTab('login')">Sign in</button>
+      <button class="tab-btn" id="register-tab" onclick="switchAuthTab('register')">Register</button>
+    </div>
+    <div id="auth-form">
+      <div class="field"><label>Phone number</label><input type="tel" placeholder="0244 000 000" /></div>
+      <div class="field"><label>Password</label><input type="password" placeholder="••••••••" /></div>
+      <button class="pay-btn" onclick="closeSignIn()">Sign in</button>
+      <button class="cancel-btn" onclick="closeSignIn()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const bundles=[
+  {id:1,net:'mtn',size:'1 GB',gb:1,validity:'1 day',vtype:'day',price:5.00,pop:false},
+  {id:2,net:'mtn',size:'2 GB',gb:2,validity:'3 days',vtype:'week',price:9.00,pop:false},
+  {id:3,net:'mtn',size:'5 GB',gb:5,validity:'7 days',vtype:'week',price:18.00,pop:true},
+  {id:4,net:'mtn',size:'10 GB',gb:10,validity:'30 days',vtype:'month',price:32.00,pop:false},
+  {id:5,net:'mtn',size:'20 GB',gb:20,validity:'30 days',vtype:'month',price:58.00,pop:false},
+  {id:6,net:'at',size:'1.5 GB',gb:1.5,validity:'2 days',vtype:'day',price:6.50,pop:false},
+  {id:7,net:'at',size:'3 GB',gb:3,validity:'7 days',vtype:'week',price:12.00,pop:true},
+  {id:8,net:'at',size:'6 GB',gb:6,validity:'30 days',vtype:'month',price:22.00,pop:false},
+  {id:9,net:'at',size:'15 GB',gb:15,validity:'30 days',vtype:'month',price:48.00,pop:false},
+  {id:10,net:'telecel',size:'1 GB',gb:1,validity:'1 day',vtype:'day',price:4.50,pop:false},
+  {id:11,net:'telecel',size:'4 GB',gb:4,validity:'7 days',vtype:'week',price:15.00,pop:true},
+  {id:12,net:'telecel',size:'8 GB',gb:8,validity:'30 days',vtype:'month',price:28.00,pop:false},
+];
+const netLabel={mtn:'MTN',at:'AirtelTigo',telecel:'Telecel'};
+const netPill={mtn:'mtn-pill',at:'at-pill',telecel:'tel-pill'};
+let cart=[];
+let currentNet='all';
+let sortMode='default';
+let activeFilters=new Set(['day','week','month','small','mid','big']);
+
+function getFiltered(){
+  let list=currentNet==='all'?[...bundles]:bundles.filter(b=>b.net===currentNet);
+  list=list.filter(b=>{
+    const vOk=activeFilters.has(b.vtype);
+    const sOk=(b.gb<=2&&activeFilters.has('small'))||(b.gb>2&&b.gb<=6&&activeFilters.has('mid'))||(b.gb>6&&activeFilters.has('big'));
+    return vOk&&sOk;
+  });
+  if(sortMode==='price-asc')list.sort((a,b)=>a.price-b.price);
+  else if(sortMode==='price-desc')list.sort((a,b)=>b.price-a.price);
+  else if(sortMode==='size')list.sort((a,b)=>b.gb-a.gb);
+  return list;
+}
+
+function renderBundles(){
+  const list=getFiltered();
+  const g=document.getElementById('bundles-grid');
+  const c=document.getElementById('bundle-count');
+  c.textContent='('+list.length+')';
+  if(!list.length){g.innerHTML='<div style="color:#444;font-size:13px;padding:20px 0;grid-column:1/-1">No bundles match your filters.</div>';return;}
+  g.innerHTML=list.map(b=>`
+    <div class="bcard" id="bc-${b.id}">
+      ${b.pop?'<div class="pop-tag">Popular</div>':''}
+      <span class="net-pill ${netPill[b.net]}">${netLabel[b.net]}</span>
+      <div class="bsize">${b.size}</div>
+      <div class="bvalid">⏱ ${b.validity}</div>
+      <div class="bprice">GH₵ ${b.price.toFixed(2)}</div>
+      <button class="badd" id="btn-${b.id}" onclick="addToCart(${b.id})">+ Add to cart</button>
+    </div>
+  `).join('');
+}
+
+function switchNet(net,el){
+  currentNet=net;
+  document.querySelectorAll('.net-item').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  renderBundles();
+}
+
+function toggleFilter(el,key){
+  if(activeFilters.has(key)){activeFilters.delete(key);el.classList.remove('on');}
+  else{activeFilters.add(key);el.classList.add('on');}
+  renderBundles();
+}
+
+function sortBundles(val){sortMode=val;renderBundles();}
+
+function addToCart(id){
+  const b=bundles.find(x=>x.id===id);
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({...b,qty:1});
+  updateCartUI();
+  const btn=document.getElementById('btn-'+id);
+  if(btn){btn.textContent='✓ Added';btn.classList.add('added');}
+  setTimeout(()=>{const b2=document.getElementById('btn-'+id);if(b2){b2.textContent='+ Add to cart';b2.classList.remove('added');}},1100);
+}
+
+function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCartUI();}
+
+function updateCartUI(){
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  const count=cart.reduce((s,x)=>s+x.qty,0);
+  document.getElementById('cart-count').textContent=count;
+  document.getElementById('cart-total').textContent='GH₵ '+total.toFixed(2);
+  const body=document.getElementById('cdbody');
+  if(!cart.length){body.innerHTML='<div class="cd-empty"><span>🛒</span><p>Your cart is empty</p></div>';return;}
+  body.innerHTML=cart.map(x=>`
+    <div class="citem">
+      <div class="citem-info">
+        <div class="cn">${x.size} · ${netLabel[x.net]}</div>
+        <div class="cs">${x.validity} · qty: ${x.qty}</div>
+      </div>
+      <div class="citem-right">
+        <span class="cp">GH₵ ${(x.price*x.qty).toFixed(2)}</span>
+        <button class="cdel" onclick="removeItem(${x.id})">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function buildOrderSum(){
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  const rows=cart.map(x=>`<div class="os-row"><span>${x.size} · ${netLabel[x.net]} ×${x.qty}</span><span>GH₵ ${(x.price*x.qty).toFixed(2)}</span></div>`).join('');
+  document.getElementById('order-sum').innerHTML=rows+`<div class="os-total"><span>Total</span><span>GH₵ ${total.toFixed(2)}</span></div>`;
+}
+
+function openCart(){document.getElementById('cart-overlay').classList.add('open');document.getElementById('cart-drawer').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cart-overlay').classList.remove('open');document.getElementById('cart-drawer').classList.remove('open');document.body.style.overflow='';}
+function openCheckout(){if(!cart.length)return;closeCart();buildOrderSum();document.getElementById('checkout-modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeCheckout(){document.getElementById('checkout-modal').classList.remove('open');document.body.style.overflow='';}
+function openSignIn(){document.getElementById('signin-modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeSignIn(){document.getElementById('signin-modal').classList.remove('open');document.body.style.overflow='';}
+
+function switchAuthTab(tab){
+  document.getElementById('login-tab').classList.toggle('active',tab==='login');
+  document.getElementById('register-tab').classList.toggle('active',tab==='register');
+  if(tab==='register'){
+    document.getElementById('auth-form').innerHTML=`<div class="field"><label>Full name</label><input type="text" placeholder="Abdul-Mohsin" /></div><div class="field"><label>Phone number</label><input type="tel" placeholder="0244 000 000" /></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••" /></div><button class="pay-btn" onclick="closeSignIn()">Create account</button><button class="cancel-btn" onclick="closeSignIn()">Cancel</button>`;
+  }else{
+    document.getElementById('auth-form').innerHTML=`<div class="field"><label>Phone number</label><input type="tel" placeholder="0244 000 000" /></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••" /></div><button class="pay-btn" onclick="closeSignIn()">Sign in</button><button class="cancel-btn" onclick="closeSignIn()">Cancel</button>`;
+  }
+}
+
+function doPay(){
+  const recv=document.getElementById('recv').value.trim();
+  const momo=document.getElementById('momo').value.trim();
+  if(!recv||!momo){alert('Please fill in all fields.');return;}
+  document.getElementById('modal-inner').innerHTML=`
+    <div class="success-box">
+      <div class="success-icon">✅</div>
+      <h3>Order confirmed!</h3>
+      <p>Your bundle will be sent to <strong style="color:#f0ead8">${recv}</strong> within 60 seconds.<br><br>A MoMo prompt has been sent to <strong style="color:#f0ead8">${momo}</strong>. Please approve it to complete payment.</p>
+      <button class="done-btn" onclick="resetAll()">Done</button>
+    </div>`;
+  cart=[];updateCartUI();
+}
+
+function resetAll(){closeCheckout();location.reload();}
+
+renderBundles();
+</script>
+</body>
+</html>
